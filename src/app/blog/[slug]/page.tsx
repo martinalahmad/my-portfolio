@@ -1,16 +1,18 @@
 import Image from "next/image";
 import { getAll, getBySlug } from "@/lib/content";
 
+interface BlogPostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export async function generateStaticParams() {
   const items = await getAll("blog");
   return items.map((p) => ({ slug: p.slug }));
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBySlug("blog", params.slug);
   if (!post) return null;
 
