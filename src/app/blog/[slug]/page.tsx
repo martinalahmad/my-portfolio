@@ -6,13 +6,11 @@ export async function generateStaticParams() {
   return items.map((p) => ({ slug: p.slug }));
 }
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getBySlug("blog", params.slug);
   if (!post) return null;
 
@@ -20,7 +18,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <main className="mx-auto max-w-3xl px-4 lg:px-6 py-14">
       {post.cover && (
         <div className="relative h-72 w-full mb-6 rounded-xl overflow-hidden">
-          <Image src={post.cover} alt={post.title} fill className="object-cover" />
+          <Image
+            src={post.cover}
+            alt={post.title}
+            fill
+            className="object-cover"
+          />
         </div>
       )}
       <h1 className="text-3xl font-semibold text-white mb-6">{post.title}</h1>
