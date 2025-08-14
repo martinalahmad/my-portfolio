@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* اختياري: theme خفيف */
+@theme {
+  --container-*-max: 1120px;
+  --radius-xl: 1.25rem;
+  --color-brand: #0EA5E9;
+}
+
+/* إضافات المشروع */
+@layer utilities {
+  .bg-neutral-980 {
+    background-color: rgb(10 10 10 / 1);
+  }
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
