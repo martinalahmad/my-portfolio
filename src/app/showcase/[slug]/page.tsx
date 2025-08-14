@@ -6,8 +6,13 @@ export async function generateStaticParams() {
   return items.map((p) => ({ slug: p.slug }));
 }
 
-export default async function ShowcaseItem({ params }: { params: { slug: string } }) {
-  const item = await getBySlug("showcase", params.slug);
+export default async function ShowcaseItem({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params; // <-- مهم
+  const item = await getBySlug("showcase", slug);
   if (!item) return null;
 
   return (
