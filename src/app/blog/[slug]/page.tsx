@@ -6,7 +6,13 @@ export async function generateStaticParams() {
   return items.map((p) => ({ slug: p.slug }));
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+interface BlogPostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBySlug("blog", params.slug);
   if (!post) return null;
 
